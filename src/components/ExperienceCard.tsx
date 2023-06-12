@@ -1,10 +1,16 @@
+"use client";
+
+import urlFor from "@/lib/urlFor";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import me from "public/me.jpg";
+import { Experience } from "typings";
 
-type Props = {};
+type Props = {
+  experience: Experience;
+};
 
-const ExperienceCard = (props: Props) => {
+const ExperienceCard = ({ experience }: Props) => {
   return (
     <article className="mt-12 flex flex-col rounded-lg items-center space-y-5 flex-shrink-0  md:w-[600px] xl:w-[700px] snap-center bg-[#292929] p-8 opacity-50 hover:opacity-100 cursor-pointer transition-opacity overflow-hidden">
       <motion.div
@@ -18,36 +24,21 @@ const ExperienceCard = (props: Props) => {
       </motion.div>
       <div className="px-0 md:px-10">
         <h4 className="text-xl lg:text-3xl font-light">
-          Junior Software Engineer
+          {experience.jobTitle}
         </h4>
         <p className="font-bold text-lg lg:text-xl mt-2">
-          James Villa Holidays
+          {experience.company}
         </p>
         <div className="flex space-x-2 lg:space-x-4 my-4">
-          <Image
-            src="https://www.freepnglogos.com/uploads/javascript-png/javascript-logo-transparent-logo-javascript-images-3.png"
-            alt="demo"
-            width={50}
-            height={50}
-          />
-          <Image
-            src="https://www.freepnglogos.com/uploads/javascript-png/javascript-logo-transparent-logo-javascript-images-3.png"
-            alt="demo"
-            width={50}
-            height={50}
-          />
-          <Image
-            src="https://www.freepnglogos.com/uploads/javascript-png/javascript-logo-transparent-logo-javascript-images-3.png"
-            alt="demo"
-            width={50}
-            height={50}
-          />
-          <Image
-            src="https://www.freepnglogos.com/uploads/javascript-png/javascript-logo-transparent-logo-javascript-images-3.png"
-            alt="demo"
-            width={50}
-            height={50}
-          />
+          {experience.technologies.map((tech) => (
+            <Image
+              key={`${experience.jobTitle}-${tech.title}`}
+              src={urlFor(tech.image).url()}
+              alt={tech.title}
+              width={50}
+              height={50}
+            />
+          ))}
 
           {/* Tech Used */}
           {/* Tech Used */}

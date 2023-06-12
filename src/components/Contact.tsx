@@ -1,3 +1,5 @@
+"use client";
+
 import { motion } from "framer-motion";
 import { PhoneIcon, MapPinIcon, EnvelopeIcon } from "@heroicons/react/24/solid";
 import { useForm } from "react-hook-form";

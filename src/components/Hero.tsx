@@ -1,13 +1,16 @@
 "use client";
 
-import { Cursor, Typewriter, useTypewriter } from "react-simple-typewriter";
+import { Cursor, useTypewriter } from "react-simple-typewriter";
 import BackgroundCircles from "./BackgroundCircles";
 import Image from "next/image";
-import Link from "next/link";
+import { PageInfo } from "typings";
+import urlFor from "@/lib/urlFor";
 
-type Props = {};
+type Props = {
+  pageInfo: PageInfo;
+};
 
-const Hero = (props: Props) => {
+const Hero = ({ pageInfo }: Props) => {
   const [text, count] = useTypewriter({
     words: ["Software Engineer.", "Web Developer.", "Squash Player."],
     delaySpeed: 1000,
@@ -18,9 +21,8 @@ const Hero = (props: Props) => {
   return (
     <div className="h-[90vh] flex flex-col md:space-y-6 items-center justify-center text-center ">
       <BackgroundCircles />
-      {/* TODO: Replace with Next Image component */}
       <Image
-        src="/me.jpg"
+        src={urlFor(pageInfo.profilePic).url()}
         alt="me"
         width="140"
         height="140"
@@ -28,7 +30,7 @@ const Hero = (props: Props) => {
       />
       <div className="z-20">
         <h1 className="text-xl md:text-2xl text-gray-500 tracking-widest">
-          Will Tuffin
+          {pageInfo.name}
         </h1>
 
         <h2 className="text-xl md:text-3xl font-semibold">
