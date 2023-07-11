@@ -1,11 +1,16 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import me from "public/me.jpg";
+import { PageInfo } from "typings";
+import urlFor from "@/lib/urlFor";
 
-type Props = {};
+type Props = {
+  pageInfo: PageInfo;
+};
 
-const About = (props: Props) => {
+const About = ({ pageInfo }: Props) => {
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -27,16 +32,17 @@ const About = (props: Props) => {
         }}
         viewport={{ once: true }}
         transition={{ duration: 0.8 }}
-        className="max-w-[300px] relative m-8"
+        className="max-w-[300px] w-72 h-72 relative m-8 flex-1"
       >
         <Image
-          src={me}
-          alt="me"
-          className="rounded-full md:rounded-lg object-contain"
+          src={urlFor(pageInfo.heroImage).url()}
+          alt="About me picture"
+          fill
+          className="rounded-lg object-contain"
         />
       </motion.div>
 
-      <div className="space-y-10 md:px-10">
+      <div className="space-y-10 md:px-10 flex-1">
         <h4 className="text-xl md:text-3xl font-semibold">
           Here is a{" "}
           <span className="underline decoration-[#F7AB0A] text-2xl md:text-4xl">
@@ -44,15 +50,7 @@ const About = (props: Props) => {
           </span>{" "}
           background
         </h4>
-        <p className="text-sm md:text-base">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum.
-        </p>
+        <p className="text-sm md:text-base">{pageInfo.backgroundInformation}</p>
       </div>
     </motion.div>
   );
